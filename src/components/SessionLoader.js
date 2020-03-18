@@ -1,0 +1,58 @@
+import React, { useCallback, useEffect, useState } from 'react';
+import { useParams } from 'react-router';
+import { joinSession, kickoff, clap } from '../lib/api';
+import useWebsocket from '../hooks/useWebsocket';
+import Session from './Session';
+import Spinner from './Spinner';
+import { Island } from './atoms/layout';
+
+export default function SessionLoader({ userName }) {
+  const { sessionCode } = useParams();
+  const [session, setSession] = useState([]);
+  const [state, setState] = useState('idle');
+
+  useEffect(() => {
+    if (sessionCode && state === 'idle') {
+      setState('loading');
+
+      // TODO: we're kinda double updating since the websockets fire here too
+      joinSession(sessionCode, userName).then(sessionData => {
+        setSession(sessionData);
+        setState('ready');
+      }).catch(e => setState('error'));
+    }
+  }, [sessionCode, state]);
+
+  const websocketCallback = useCallback((event, newState) => {
+    if (event === 'update-state') {
+      setSession(newState);
+    }
+  }, [setState]);
+
+  useWebsocket(sessionCode, websocketCallback);
+
+  if (state === 'loading' || state === 'idle') return <Island><Spinner /></Island>;
+  if (state === 'error') return <Island><h1>Error</h1></Island>;
+
+  const onClap = () => {
+    clap(sessionCode, userName).catch(e => console.error(e));
+  };
+
+  const onKickoff = () => {
+    kickoff(sessionCode).catch(e => console.error(e));
+  }
+
+  const targetTime = session.targetTime ? Date.parse(session.targetTime) : null;
+  const users = session.users.map(u => ({ ...u, clapTime: u.clapTime ? Date.parse(u.clapTime) : null }));
+  const currentUser = users.find(u => u.name === userName);
+
+  return (
+    <Session
+      currentUser={currentUser}
+      users={users}
+      targetTime={targetTime}
+      onClap={onClap}
+      onKickoff={onKickoff}
+    />
+  );
+}

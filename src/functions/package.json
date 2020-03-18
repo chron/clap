@@ -1,0 +1,12 @@
+{
+  "name": "clap-functions",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "faunadb": "^2.13.0",
+    "pusher": "^3.0.0"
+  },
+  "scripts": {},
+  "devDependencies": {}
+}

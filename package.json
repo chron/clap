@@ -1,0 +1,36 @@
+{
+  "name": "clap",
+  "version": "0.1.0",
+  "main": "index.js",
+  "author": "Paul Prestidge <paul.prestidge@flickelectric.co.nz>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "date-fns": "^2.11.0",
+    "pusher-js": "^5.1.1",
+    "react": ">=15",
+    "react-dom": "^16.13.0",
+    "react-router-dom": "^5.1.2",
+    "styled-components": "^5.0.1",
+    "styled-reset": "^4.1.1"
+  },
+  "scripts": {
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
