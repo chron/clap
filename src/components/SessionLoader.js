@@ -5,6 +5,7 @@ import useWebsocket from '../hooks/useWebsocket';
 import Session from './Session';
 import Spinner from './Spinner';
 import { Island } from './atoms/layout';
+import clapUrl from '../audio/clap.wav';
 
 export default function SessionLoader({ userName, avatar }) {
   const { sessionCode } = useParams();
@@ -36,6 +37,8 @@ export default function SessionLoader({ userName, avatar }) {
 
   const onClap = () => {
     clap(sessionCode, userName).catch(e => console.error(e));
+    const clapWav = new Audio(clapUrl);
+    clapWav.play();
   };
 
   const onKickoff = () => {
