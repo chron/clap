@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "date-fns": "^2.11.0",
     "dotenv": "^8.2.0",
     "faunadb": "^2.13.0",
     "pusher": "^3.0.0"
