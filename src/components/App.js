@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route, Redirect, useRouteMatch } from 'react-router-dom';
+import { Switch, Route, Redirect, useRouteMatch, useLocation } from 'react-router-dom';
 import useLocalStorage from '../hooks/useLocalStorage';
 import { Island } from './atoms/layout';
 import SessionLoader from './SessionLoader';
@@ -10,9 +10,10 @@ export default function App() {
   const [name, setName] = useLocalStorage('username', '');
   const [avatar, setAvatar] = useLocalStorage('avatar', '👩🏻‍💻');
 
-  const match = useRouteMatch('/settings');
+  const matchSettings = useRouteMatch('/settings');
+  const location = useLocation();
 
-  if (!match && name === '') return <Redirect to="/settings" />;
+  if (!matchSettings && name === '') return <Redirect to={{ pathname: "/settings", from: location.pathname }} />;
 
   return (
     <Switch>

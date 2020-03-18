@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { Island, Stack } from './atoms/layout';
 import { Heading, HelpText} from './atoms/text';
 import { TextField } from './atoms/inputs';
@@ -8,13 +8,14 @@ import { Button } from './atoms/buttons';
 export default function Settings({ oldName, oldAvatar, changeName, changeAvatar }) {
   const [name, setName] = useState(oldName);
   const [avatar, setAvatar] = useState(oldAvatar);
+  const { from } = useLocation();
 
   const history = useHistory();
 
   const confirmChanges = () => {
     changeName(name);
     changeAvatar(avatar);
-    history.push('/');
+    history.push(from || '/');
   }
 
   const onKeyPress = e => {
