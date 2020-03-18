@@ -9,7 +9,7 @@ exports.handler = async function(event, _context) {
   if (!sessionCode) return { statusCode: 404 };
   if (targetTime) return { statusCode: 422 }; // already started!
 
-  const newTargetTime = add(new Date, { seconds: 11 }).toISOString();
+  const newTargetTime = add(new Date, { seconds: 10 }).toISOString();
   const session = await database.updateSession({ sessionCode, targetTime: newTargetTime });
 
   fireEvent(sessionCode, 'update-state', session);

@@ -30,8 +30,8 @@ async function post(action, params, payload = {}) {
   }
 }
 
-export async function joinSession(sessionCode, userName) {
-  return get('join-session', { sessionCode, userName });
+export async function joinSession(sessionCode, userName, avatar) {
+  return get('join-session', { sessionCode, userName, avatar });
 }
 
 export async function clap(sessionCode, userName) {

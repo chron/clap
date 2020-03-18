@@ -19,8 +19,8 @@ module.exports.findSession = async function(sessionCode) {
   }
 }
 
-module.exports.createSession = async function(sessionCode, userName) {
-  const data = { sessionCode, users: [{ name: userName, emoji: '👩🏻‍💻' }] };
+module.exports.createSession = async function(sessionCode, userName, emoji) {
+  const data = { sessionCode, users: [{ name: userName, emoji }] };
   const response = await client.query(Create(Collection('sessions'), { data }));
   return response.data;
 }

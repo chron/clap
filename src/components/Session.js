@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useRouteMatch } from 'react-router-dom';
-import differenceInSeconds from 'date-fns/differenceInSeconds';
+import differenceInMilliseconds from 'date-fns/differenceInMilliseconds';
 import Sidebar from './Sidebar';
 import { Island, Stack } from './atoms/layout';
 import { Button } from './atoms/buttons';
@@ -20,6 +20,8 @@ const Display = styled(Island)`
 
 const Countdown = styled.div`
   font-size: 200px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
 `;
 
 export default function Session({ currentUser, users, targetTime, onClap, onKickoff }) {
@@ -27,7 +29,7 @@ export default function Session({ currentUser, users, targetTime, onClap, onKick
   const match = useRouteMatch();
   let sessionState;
 
-  if (targetTime && differenceInSeconds(new Date(), targetTime) >= 5) {
+  if (targetTime && differenceInMilliseconds(new Date(), targetTime) >= 5000) {
     sessionState = 'finished';
   } else if (targetTime) {
     sessionState = 'active';
@@ -55,7 +57,7 @@ export default function Session({ currentUser, users, targetTime, onClap, onKick
   useEffect(() => {
     if (sessionState === 'active') {
       const interval = setInterval(() => {
-        setCountdown(differenceInSeconds(targetTime, new Date));
+        setCountdown(differenceInMilliseconds(targetTime, new Date));
       }, 100);
 
       return () => clearInterval(interval);
@@ -91,7 +93,7 @@ export default function Session({ currentUser, users, targetTime, onClap, onKick
         {sessionState === 'active' && countdown !== null && (
           <Stack>
             <HelpText>Hit <kbd>Space</kbd> as close to zero as you can!</HelpText>
-            <Countdown>{countdown >= 0 ? countdown : '👏🏼'}</Countdown>
+            <Countdown>{countdown >= 0 ? (countdown / 1000).toFixed(1) : '👏🏼'}</Countdown>
           </Stack>
         )}
       </Display>

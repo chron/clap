@@ -8,6 +8,8 @@ import Home from './Home';
 
 export default function App() {
   const [name, setName] = useLocalStorage('username', '');
+  const [avatar, setAvatar] = useLocalStorage('avatar', '👩🏻‍💻');
+
   const match = useRouteMatch('/settings');
 
   if (!match && name === '') return <Redirect to="/settings" />;
@@ -15,11 +17,16 @@ export default function App() {
   return (
     <Switch>
       <Route exact path="/settings">
-        <Settings oldName={name} changeName={setName} />
+        <Settings
+          oldName={name}
+          changeName={setName}
+          oldAvatar={avatar}
+          changeAvatar={setAvatar}
+        />
       </Route>
 
       <Route exact path="/:sessionCode">
-        <SessionLoader userName={name} />
+        <SessionLoader userName={name} avatar={avatar} />
       </Route>
 
       <Route exact path="/">

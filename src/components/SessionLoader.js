@@ -6,7 +6,7 @@ import Session from './Session';
 import Spinner from './Spinner';
 import { Island } from './atoms/layout';
 
-export default function SessionLoader({ userName }) {
+export default function SessionLoader({ userName, avatar }) {
   const { sessionCode } = useParams();
   const [session, setSession] = useState([]);
   const [state, setState] = useState('idle');
@@ -16,7 +16,7 @@ export default function SessionLoader({ userName }) {
       setState('loading');
 
       // TODO: we're kinda double updating since the websockets fire here too
-      joinSession(sessionCode, userName).then(sessionData => {
+      joinSession(sessionCode, userName, avatar).then(sessionData => {
         setSession(sessionData);
         setState('ready');
       }).catch(e => setState('error'));
