@@ -10,7 +10,7 @@ exports.handler = async function(event, _context) {
   if (!sessionCode) return { statusCode: 404 };
   if (userIndex < 0) return { statusCode: 422 }; // user doesn't exist
   if (!targetTime) return { statusCode: 422 }; // hasn't started
-  if (targetTime && differenceInSeconds(new Date(), targetTime) >= 5) return { statusCode: 422 }; // finished
+  if (targetTime && differenceInSeconds(new Date(), Date.parse(targetTime)) >= 5) return { statusCode: 422 }; // finished
 
   const clapTime = (new Date).toISOString();
 
