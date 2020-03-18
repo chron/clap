@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Island, Stack } from './atoms/layout';
 import { Heading } from './atoms/text';
@@ -16,7 +16,7 @@ export default function Home() {
     <Island>
       <Stack>
         <Heading>Synchronized clap time</Heading>
-        <Button onClick={generateSessionCode}>Create a new lobby</Button>
+        <Button onClick={generateSessionCode}>Start a new clap</Button>
       </Stack>
     </Island>
   );

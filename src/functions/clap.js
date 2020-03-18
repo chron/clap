@@ -18,7 +18,7 @@ exports.handler = async function(event, _context) {
   newUsers.splice(userIndex, 1, { ...users[userIndex], clapTime });
   const session = await database.updateSession({ sessionCode, users: newUsers });
 
-  fireEvent(sessionCode, 'update-state', session);
+  await fireEvent(sessionCode, 'update-state', session);
 
   return {
     statusCode: 200,

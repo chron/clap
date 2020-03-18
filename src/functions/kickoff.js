@@ -12,7 +12,7 @@ exports.handler = async function(event, _context) {
   const newTargetTime = add(new Date, { seconds: 10 }).toISOString();
   const session = await database.updateSession({ sessionCode, targetTime: newTargetTime });
 
-  fireEvent(sessionCode, 'update-state', session);
+  await fireEvent(sessionCode, 'update-state', session);
 
   return {
     statusCode: 200,

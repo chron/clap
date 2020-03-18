@@ -23,7 +23,7 @@ exports.handler = async function(event, _context) {
     session = await database.updateSession({ sessionCode, users: newUsers });
   }
 
-  fireEvent(sessionCode, 'update-state', session);
+  await fireEvent(sessionCode, 'update-state', session);
 
   return {
     statusCode: 200,
