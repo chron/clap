@@ -28,3 +28,4 @@ Hosted on Netlify: https://succeedsquad.netlify.com
 * Color scheme from https://coolors.co/191d32-282f44-453a49-339989-7de2d1
 * Favicons from https://favicon.io/emoji-favicons/clapping-hands/
 * CSS Spinner from https://loading.io/css/
+* Clap sound by Andy Chen (from https://samplefocus.com/samples/clap-short)

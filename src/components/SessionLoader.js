@@ -11,6 +11,7 @@ export default function SessionLoader({ userName, avatar }) {
   const { sessionCode } = useParams();
   const [session, setSession] = useState([]);
   const [state, setState] = useState('idle');
+  const [clapInFlight, setClapInFlight] = useState(false);
 
   useEffect(() => {
     if (sessionCode && state === 'idle') {
@@ -36,7 +37,12 @@ export default function SessionLoader({ userName, avatar }) {
   if (state === 'error') return <Island><h1>Error</h1></Island>;
 
   const onClap = () => {
-    clap(sessionCode, userName).catch(e => console.error(e));
+    if (clapInFlight) return;
+
+    setClapInFlight(true);
+    clap(sessionCode, userName)
+      .then(() => setClapInFlight(false))
+      .catch(e => console.error(e));
     const clapWav = new Audio(clapUrl);
     clapWav.play();
   };
