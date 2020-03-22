@@ -7,7 +7,7 @@ import Spinner from './Spinner';
 import { Island } from './atoms/layout';
 import clapUrl from '../audio/clap.wav';
 
-export default function SessionLoader({ userName, avatar }) {
+export default function SessionLoader({ userName, userId, avatar }) {
   const { sessionCode } = useParams();
   const [session, setSession] = useState([]);
   const [state, setState] = useState('idle');
@@ -18,10 +18,13 @@ export default function SessionLoader({ userName, avatar }) {
       setState('loading');
 
       // TODO: we're kinda double updating since the websockets fire here too
-      joinSession(sessionCode, userName, avatar).then(sessionData => {
+      joinSession(sessionCode, userName, userId, avatar).then(sessionData => {
         setSession(sessionData);
         setState('ready');
-      }).catch(e => setState('error'));
+      }).catch(e => {
+        console.error(e);
+        setState('error');
+      });
     }
   }, [sessionCode, state]);
 
@@ -40,7 +43,7 @@ export default function SessionLoader({ userName, avatar }) {
     if (clapInFlight) return;
 
     setClapInFlight(true);
-    clap(sessionCode, userName)
+    clap(sessionCode, userName, userId)
       .then(() => setClapInFlight(false))
       .catch(e => console.error(e));
     const clapWav = new Audio(clapUrl);
@@ -48,7 +51,7 @@ export default function SessionLoader({ userName, avatar }) {
   };
 
   const onKickoff = () => {
-    kickoff(sessionCode).catch(e => console.error(e));
+    kickoff(sessionCode, userId).catch(e => console.error(e));
   }
 
   const targetTime = session.targetTime ? Date.parse(session.targetTime) : null;

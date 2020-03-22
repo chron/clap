@@ -1,5 +1,6 @@
 const add = require('date-fns/add');
 const database = require('./lib/database');
+const sessionSerializer = require('./lib/sessionSerializer');
 const { fireEvent } = require('./lib/websockets');
 
 exports.handler = async function(event, _context) {
@@ -12,10 +13,10 @@ exports.handler = async function(event, _context) {
   const newTargetTime = add(new Date, { seconds: 10 }).toISOString();
   const session = await database.updateSession({ sessionCode, targetTime: newTargetTime });
 
-  await fireEvent(sessionCode, 'update-state', session);
+  await fireEvent(sessionCode, 'update-state', sessionSerializer(session));
 
   return {
     statusCode: 200,
-    body: JSON.stringify(session),
+    body: JSON.stringify(sessionSerializer(session)),
   };
 }

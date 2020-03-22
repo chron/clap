@@ -30,14 +30,14 @@ async function post(action, params, payload = {}) {
   }
 }
 
-export async function joinSession(sessionCode, userName, avatar) {
-  return get('join-session', { sessionCode, userName, avatar });
+export async function joinSession(sessionCode, userName, userId, avatar) {
+  return get('join-session', { sessionCode, userName, userId, avatar });
 }
 
-export async function clap(sessionCode, userName) {
-  return post('clap', { sessionCode, userName });
+export async function clap(sessionCode, userName, userId) {
+  return post('clap', { sessionCode, userName, userId });
 }
 
-export async function kickoff(sessionCode) {
-  return post('kickoff', { sessionCode });
+export async function kickoff(sessionCode, userId) {
+  return post('kickoff', { sessionCode, userId });
 }
