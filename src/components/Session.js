@@ -41,7 +41,7 @@ export default function Session({ currentUser, users, targetTime, onClap, onKick
     if (!currentUser) { return; }
     if (currentUser.clapTime) { return; }
     if (sessionState !== 'active') { return; }
-    if (e.code !== 'Space') { return; }
+    if (e.code && e.code !== 'Space') { return; } // for key event only
 
     e.preventDefault();
 
@@ -92,7 +92,12 @@ export default function Session({ currentUser, users, targetTime, onClap, onKick
         )}
         {sessionState === 'active' && countdown !== null && (
           <Stack>
-            <HelpText>Hit <kbd>Space</kbd> as close to zero as you can!</HelpText>
+            {currentUser && !currentUser.clapTime && (
+              <>
+                <HelpText>Hit <kbd>Space</kbd> or click the button as close to zero as you can!</HelpText>
+                <Button onClick={handleClap}>Clap!</Button>
+              </>
+            )}
             <Countdown>{countdown >= 0 ? (countdown / 1000).toFixed(1) : '👏🏼'}</Countdown>
           </Stack>
         )}

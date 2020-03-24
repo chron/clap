@@ -9,7 +9,16 @@ export const Button = styled.button`
   background-color: ${p => p.theme.accentColor};
   box-shadow: 0px 10px 14px -7px #276873;
 
+  &:focus {
+    outline: none;
+    box-shadow:  0px 0px 10px 3px ${p => p.theme.inactiveColor};
+  }
+
   &:hover {
     filter: brightness(85%);
+  }
+
+  &:active {
+    filter: brightness(70%);
   }
 `;
