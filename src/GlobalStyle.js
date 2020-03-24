@@ -12,5 +12,6 @@ export default createGlobalStyle`
   body {
     font-family: system-ui;
     background-color: ${p => p.theme.backgroundColor};
+    overscroll-behavior: none;
   }
 `;

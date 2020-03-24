@@ -8,6 +8,8 @@ const SidebarWrapper = styled.div`
   padding: 20px 50px;
   border-right: 4px solid black;
   background-color: ${p => p.theme.sidebarColor};
+  overflow-y: auto;
+  min-width: 400px;
 `;
 
 const UserList = styled.ul`
