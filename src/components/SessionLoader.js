@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import { joinSession, kickoff, clap } from '../lib/api';
+import { joinSession, ready, clap } from '../lib/api';
 import useWebsocket from '../hooks/useWebsocket';
 import Session from './Session';
 import Spinner from './Spinner';
@@ -50,8 +50,8 @@ export default function SessionLoader({ userName, userId, avatar }) {
     clapWav.play();
   };
 
-  const onKickoff = () => {
-    kickoff(sessionCode, userId).catch(e => console.error(e));
+  const onReady = () => {
+    ready(sessionCode, userId).catch(e => console.error(e));
   }
 
   const targetTime = session.targetTime ? Date.parse(session.targetTime) : null;
@@ -64,7 +64,7 @@ export default function SessionLoader({ userName, userId, avatar }) {
       users={users}
       targetTime={targetTime}
       onClap={onClap}
-      onKickoff={onKickoff}
+      onReady={onReady}
     />
   );
 }

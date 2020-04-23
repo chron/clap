@@ -38,6 +38,10 @@ export async function clap(sessionCode, userName, userId) {
   return post('clap', { sessionCode, userName, userId });
 }
 
-export async function kickoff(sessionCode, userId) {
-  return post('kickoff', { sessionCode, userId });
+export async function ready(sessionCode, userId) {
+  return post('ready', { sessionCode, userId });
+}
+
+export async function recentSessions() {
+  return get('recent-sessions', {});
 }

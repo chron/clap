@@ -4,7 +4,7 @@ const sessionSerializer = require('./lib/sessionSerializer');
 const differenceInSeconds = require('date-fns/differenceInSeconds');
 
 exports.handler = async function(event, _context) {
-  const { sessionCode, userName, userId } = event.queryStringParameters;
+  const { sessionCode, userId } = event.queryStringParameters;
   const { targetTime, users } = await database.findSession(sessionCode);
   const user = users[userId];
 

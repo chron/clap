@@ -24,7 +24,7 @@ const Countdown = styled.div`
   font-variant-numeric: tabular-nums;
 `;
 
-export default function Session({ currentUser, users, targetTime, onClap, onKickoff }) {
+export default function Session({ currentUser, users, targetTime, onClap, onReady }) {
   const [countdown, setCountdown] = useState(null);
   const match = useRouteMatch();
   let sessionState;
@@ -86,8 +86,13 @@ export default function Session({ currentUser, users, targetTime, onClap, onKick
           <Stack>
             <HelpText>Paste this link to the other people who will be joining:</HelpText>
             <TextField readonly onClick={copyUrl} defaultValue={window.location.href} />
-            <HelpText>Then, once everyone is ready...</HelpText>
-            <Button onClick={onKickoff}>Start the countdown</Button>
+            <HelpText>The clap will begin when everyone present is ready</HelpText>
+            <Button
+              onClick={onReady}
+              disabled={currentUser.ready}
+            >
+              {currentUser.ready ? 'Waiting for the others...' : "I'm ready!"}
+            </Button>
           </Stack>
         )}
         {sessionState === 'active' && countdown !== null && (

@@ -21,7 +21,7 @@ netlify dev
 
 ### "Production" version
 
-Hosted on Netlify: https://succeedsquad.netlify.com
+Hosted on Netlify: https://succeedsquad.netlify.app
 
 ### Chur
 

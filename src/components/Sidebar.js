@@ -31,6 +31,7 @@ const Avatar = styled.div`
   min-height: 100px;
   margin-right: 20px;
   font-size: 60px;
+  border: 2px solid ${p => p.ready ? 'black' : 'transparent'};
   border-radius: 60px;
   background-color: ${p => p.currentUser ? p.theme.activeColor : p.theme.inactiveColor};
 `;
@@ -39,9 +40,9 @@ export default function Sidebar({ currentUser, users, targetTime }) {
   return (
     <SidebarWrapper>
       <UserList>
-        {users.map(({ name, emoji, clapTime }) => (
+        {users.map(({ name, emoji, ready, clapTime }) => (
           <User key={name}>
-            <Avatar currentUser={currentUser?.name === name }>{emoji}</Avatar>
+            <Avatar ready={ready} currentUser={currentUser?.name === name }>{emoji}</Avatar>
             <Stack>
               <span>{name}</span>
               {targetTime && clapTime && <span>{differenceInMilliseconds(targetTime, clapTime)}ms</span>}
