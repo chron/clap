@@ -39,6 +39,7 @@ const Clap = styled.div`
   height: 100%;
   background-color: rgba(255, 255, 255);
   animation: ${fadeOut} 0.3s ease-in 0s 1 forwards;
+  pointer-events: none;
 `;
 
 
