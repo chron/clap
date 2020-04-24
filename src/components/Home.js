@@ -51,7 +51,7 @@ export default function Home() {
                   const time = clapTime && targetTime && differenceInMilliseconds(Date.parse(targetTime), Date.parse(clapTime));
 
                   return (
-                    <li>
+                    <li key={name}>
                       {emoji} {name}
                       {time && `(${time}ms)`}
                     </li>

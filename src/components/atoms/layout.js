@@ -12,7 +12,7 @@ export const Stack = styled.div`
   display: flex;
   flex-direction: column;
 
-  * + * {
+  > * + * {
     margin-top: 20px;
   }
 `;
@@ -20,7 +20,7 @@ export const Stack = styled.div`
 export const Inline = styled.div`
   display: flex;
 
-  * + * {
+  > * + * {
     margin-left: 10px;
   }
 `;
