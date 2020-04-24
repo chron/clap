@@ -35,6 +35,10 @@ export default function App() {
         />
       </Route>
 
+      <Route exact path="/room/:roomName">
+        <SessionLoader userName={name} userId={userId} avatar={avatar} />
+      </Route>
+
       <Route exact path="/:sessionCode">
         <SessionLoader userName={name} userId={userId} avatar={avatar} />
       </Route>

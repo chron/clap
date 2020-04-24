@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { format } from 'date-fns';
 import { useParams } from 'react-router';
 import { joinSession, ready, clap } from '../lib/api';
 import useWebsocket from '../hooks/useWebsocket';
@@ -8,7 +9,12 @@ import { Island } from './atoms/layout';
 import clapUrl from '../audio/clap.wav';
 
 export default function SessionLoader({ userName, userId, avatar }) {
-  const { sessionCode } = useParams();
+  let { roomName, sessionCode } = useParams();
+
+  if (roomName) {
+    sessionCode = `room-${roomName}-${format(new Date(), 'yyyy-MM-dd')}`;
+  }
+
   const [session, setSession] = useState([]);
   const [state, setState] = useState('idle');
   const [clapInFlight, setClapInFlight] = useState(false);
